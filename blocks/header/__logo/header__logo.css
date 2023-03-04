@@ -6,7 +6,7 @@
   margin-bottom: 41px;
 }
 
-@media all and (max-width: 880px) {
+@media all and (max-width: 910px) {
   .header__logo {
     margin-left: 27px;
   }

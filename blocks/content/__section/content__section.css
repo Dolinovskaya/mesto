@@ -1,21 +1,19 @@
-.page__footer {
+.content__section {
   width: 100%;
-  margin-top: 66px;
-  margin-bottom: 56px;
+  margin-bottom: 50px;
   padding: 0 200px;
   box-sizing: border-box;
 }
 
 @media all and (max-width: 1279px) {
-  .page__footer {
+  .content__section {
     padding: 0 calc(100% / 2 - 440px);
   }
 }
 
 @media all and (max-width: 920px) {
-  .page__footer {
-    margin-top: 48px;
-    margin-bottom: 33px;
+  .content__section {
+    margin-bottom: 36px;
     padding: 0 19px;
   }
 }
