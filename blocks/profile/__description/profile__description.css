@@ -1,5 +1,5 @@
 .profile__description {
-  max-width: 550px;
+  max-width: 400px;
   display: grid;
   grid-template-columns: 1fr min-content;
   align-items: center;
@@ -9,7 +9,7 @@
     'job job';
 }
 
-@media all and (max-width: 530px) {
+@media all and (max-width: 425px) {
   .profile__description {
     gap: 7px 10px;
   }

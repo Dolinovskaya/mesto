@@ -10,15 +10,10 @@
   overflow: hidden;
 }
 
-@media all and (max-width: 530px) {
+@media all and (max-width: 425px) {
   .profile__job {
     font-size: 14px;
     line-height: 17px;
-  }
-}
-
-@media all and (max-width: 425px) {
-  .profile__job {
     text-align: center;
   }
 }
