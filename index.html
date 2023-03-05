@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Место</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body class="page">
+  <div class="page__container">
+    <header class="header page__header">
+      <div class="header__logo"></div>
+      <div class="header__line"></div>
+    </header>
+    <main class="content">
+      <section class="profile content__section">
+        <div class="profile__info">
+          <img src="./images/ava.jpg" alt="фото профиля" class="profile__avatar">
+          <div class="profile__description">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <p class="profile__job">Исследователь океана</p>
+            <button class="profile__edit-button"></button>
+          </div>
+        </div>
+        <button class="profile__add-button"></button>
+      </section>
+      <section class="places content__section" aria-label="Фотокарточки">
+        <article class="place places__item">
+          <img src="./images/Bergamo.jpg" alt="вид на Бергамо" class="place__photo">
+          <div class="place__info">
+            <h2 class="place__title">Бергамо, Италия</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </article>
+        <div class="place places__item">
+          <img src="./images/South-Tyrol.jpg" alt="снежные горы на фоне звездного неба" class="place__photo">
+          <div class="place__info">
+            <h2 class="place__title">Южный Тироль, Италия</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </div>
+        <div class="place places__item">
+          <img src="./images/Jaipur.jpg" alt="высокое красное здание с множеством окон" class="place__photo">
+          <div class="place__info">
+            <h2 class="place__title">Джайпур, Индия</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </div>
+        <div class="place places__item">
+          <img src="./images/Sydney.jpg" alt="Сиднейский дом оперы в пасмурную погоду" class="place__photo">
+          <div class="place__info">
+            <h2 class="place__title">Сидней, Австралия</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </div>
+        <div class="place places__item">
+          <img src="./images/Algarve.jpg" alt="вид на океан с вершины скалы" class="place__photo">
+          <div class="place__info">
+            <h2 class="place__title">Алгарве, Португалия</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </div>
+        <div class="place places__item">
+          <img src="./images/Namib.jpg" alt="Пустыня Намиб" class="place__photo">
+          <div class="place__info">
+            <h2 class="place__title">Пустыня Намиб</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer page__footer">
+      <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
+    </footer>
+    <section class="popup">
+      <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <form class="form popup__content" name="formProfileInfo">
+          <h2 class="form__heading">Редактировать профиль</h2>
+            <input type="text" required placeholder="Имя" class="form__input form__input_text_name">
+            <input type="text" required placeholder="О себе" class="form__input form__input_text_job">
+          <button type="submit" class="form__submit-button">Сохранить</button>
+        </form>
+      </div>
+    </section>
+  </div>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>
