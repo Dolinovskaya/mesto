@@ -2,6 +2,7 @@
   grid-area: button;
   width: 24px;
   height: 24px;
+  padding: 0;
   border: 1px solid #FFFFFF;
   background-color: black;
   background-image: url('../../../images/Vector.png');
@@ -15,4 +16,8 @@
     width: 18px;
     height: 18px;
   }
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
 }

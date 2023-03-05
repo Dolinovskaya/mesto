@@ -1,11 +1,11 @@
 .form__submit-button {
   width: 100%;
-  background-color: #000000;
+  box-sizing: border-box;
+  padding: 14px 0;
   border: none;
+  background-color: #000000;
   border-radius: 2px;
   cursor: pointer;
-  padding: 14px 0;
-  box-sizing: border-box;
   margin-top: 48px;
   font-weight: 400;
   font-size: 18px;
@@ -19,4 +19,8 @@
     font-size: 14px;
     line-height: 17px;
   }
+}
+
+.form__submit-button:hover {
+  opacity: 0.8;
 }
