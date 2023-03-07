@@ -25,42 +25,42 @@
         <button type="button" class="profile__add-button" aria-label="кнопка добавления фотокарточек"></button>
       </section>
       <section class="places content__section" aria-label="Фотокарточки">
-        <article class="place places__item">
+        <article class="place">
           <img src="./images/Bergamo.jpg" alt="вид на Бергамо" class="place__photo">
           <div class="place__info">
             <h2 class="place__title">Бергамо, Италия</h2>
-            <button type="button" class="place__like-button place__like-button_active" aria-label="кнопка добавления лайка"></button>
+            <button type="button" class="place__like-button" aria-label="кнопка добавления лайка"></button>
           </div>
         </article>
-        <article class="place places__item">
+        <article class="place">
           <img src="./images/South-Tyrol.jpg" alt="озеро окруженное горами" class="place__photo">
           <div class="place__info">
             <h2 class="place__title">Южный Тироль, Италия</h2>
             <button type="button" class="place__like-button" aria-label="кнопка добавления лайка"></button>
           </div>
         </article>
-        <article class="place places__item">
+        <article class="place">
           <img src="./images/Jaipur.jpg" alt="высокое красное здание с множеством окон" class="place__photo">
           <div class="place__info">
             <h2 class="place__title">Джайпур, Индия</h2>
             <button type="button" class="place__like-button" aria-label="кнопка добавления лайка"></button>
           </div>
         </article>
-        <article class="place places__item">
+        <article class="place">
           <img src="./images/Sydney.jpg" alt="Сиднейский дом оперы в ясную погоду" class="place__photo">
           <div class="place__info">
             <h2 class="place__title">Сидней, Австралия</h2>
             <button type="button" class="place__like-button" aria-label="кнопка добавления лайка"></button>
           </div>
         </article>
-        <article class="place places__item">
+        <article class="place">
           <img src="./images/Algarve.jpg" alt="вид на океан с вершины скалы" class="place__photo">
           <div class="place__info">
             <h2 class="place__title">Алгарве, Португалия</h2>
             <button type="button" class="place__like-button" aria-label="кнопка добавления лайка"></button>
           </div>
         </article>
-        <article class="place places__item">
+        <article class="place">
           <img src="./images/Namib.jpg" alt="пустыня Намиб на закате" class="place__photo">
           <div class="place__info">
             <h2 class="place__title">Пустыня Намиб</h2>
@@ -75,14 +75,12 @@
     <div class="popup">
       <div class="popup__container">
         <button class="popup__close-button"></button>
-        <div class="popup__content">
-          <h2 class="popup__heading">Редактировать профиль</h2>
-          <form class="form" name="formProfileInfo">
-            <input type="text" required placeholder="Имя" name="nameInput" class="form__input form__input_text_name">
-            <input type="text" required placeholder="О себе" name="jobInput" class="form__input form__input_text_job">
-            <button type="submit" class="form__submit-button">Сохранить</button>
-          </form>
-        </div>
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <form class="form" name="formProfileInfo">
+          <input type="text" required placeholder="Имя" name="nameInput" class="form__input form__input_text_name">
+          <input type="text" required placeholder="О себе" name="jobInput" class="form__input form__input_text_job">
+          <button type="submit" class="form__submit-button">Сохранить</button>
+        </form>
       </div>
     </div>
   </div>
