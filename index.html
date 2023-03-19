@@ -72,7 +72,8 @@
     <footer class="footer page__footer">
       <p class="footer__copyright" lang="en">&copy; 2023 Mesto Russia</p>
     </footer>
-    <div class="popup">
+
+    <div class="popup popup__profile-edit">
       <div class="popup__container">
         <button class="popup__close-button"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
@@ -83,7 +84,30 @@
         </form>
       </div>
     </div>
+
+    <div class="popup popup__place-add">
+      <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <h2 class="popup__heading">Новое место</h2>
+        <form class="form" name="formProfileInfo">
+          <input type="text" required placeholder="Название" name="nameInput" class="form__input form__input_text_place">
+          <input type="text" required placeholder="Ссылка на картинку" name="linkInput" class="form__input form__input_text_link">
+          <button type="submit" class="form__submit-button">Создать</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup__image-zoom">
+      <div class="popup__image-container">
+        <button class="popup__close-button"></button>
+        <figure class="popup__figure">
+          <img src="./images/Bergamo.jpg" alt="" class="popup__image">
+          <figcaption class="popup__caption">Бергамо</figcaption>
+        </figure>
+      </div>
+    </div>
   </div>
-  <script src="./scripts/index.js" defer></script>
+  <script src="./scripts/index_new.js" defer></script>
+  <!-- <script src="./scripts/index.js" defer></script> -->
 </body>
 </html>

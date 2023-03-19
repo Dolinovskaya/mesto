@@ -2,6 +2,8 @@ const popupElement = document.querySelector('.popup');
 const popupCloseButtonElement = popupElement.querySelector('.popup__close-button');
 const popupOpenButtonElement = document.querySelector('.profile__edit-button');
 
+const popupOpenAddButtonElement = document.querySelector('.profile__add-button');
+
 let nameProfile = document.querySelector('.profile__name');
 let jobProfile = document.querySelector('.profile__job');
 
@@ -32,5 +34,8 @@ function handleFormSubmit(evt) {
 // вызываем ф-ции при нажатии кнопок
 popupOpenButtonElement.addEventListener('click', openPopup);
 popupCloseButtonElement.addEventListener('click', closePopup);
+
+popupOpenAddButtonElement.addEventListener('click', openPopup);
+popupOpenAddButtonElement.addEventListener('click', closePopup);
 
 formElement.addEventListener('submit', handleFormSubmit);
