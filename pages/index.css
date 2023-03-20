@@ -20,6 +20,7 @@
 @import url(../blocks/places/places.css);
 @import url(../blocks/place/place.css);
 @import url(../blocks/place/__photo/place__photo.css);
+@import url(../blocks/place/__trash-button/place__trash-button.css);
 @import url(../blocks/place/__info/place__info.css);
 @import url(../blocks/place/__title/place__title.css);
 @import url(../blocks/place/__like-button/place__like-button.css);
@@ -29,45 +30,24 @@
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__heading/popup__heading.css);
+@import url(../blocks/popup/_for/popup_for_image-zoom.css);
+@import url(../blocks/popup/__figure-container/popup__figure-container.css);
+@import url(../blocks/popup/__figure/popup__figure.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__caption/popup__caption.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__submit-button/form__submit-button.css);
 
-.popup__figure {
-  margin: 0;
-  /* width: 100%;
-  height: 100%; */
-}
 
-.popup__caption {
-  margin: 0;
-  margin-top: 10px;
-  max-width: 75vw;
-  width: 100%;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  color: #FFFFFF;
-}
 
-.popup__image {
-  display: block;
-  /* max-width: 75vw; */
-  max-height: 75vh;
-  width: 100%;
-  object-fit: cover;
-  object-position: top;
-}
 
-.popup__image-container {
-  max-width: 75vw;
-  min-width: 240px;
-  position: relative;
-}
 
-.popup__image-zoom {
-  background-color: rgba(0, 0, 0, 0.9);
-}
+
+
+
+
+
 
 
 
