@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
   <link rel="stylesheet" href="./pages/index.css">
+  <script src="./scripts/index.js" defer></script>
 </head>
 <body class="page">
   <div class="page__container">
@@ -47,7 +48,7 @@
         <h2 class="popup__heading">Новое место</h2>
         <form class="form form_for_place-add" name="formPlaceInfo">
           <input type="text" required placeholder="Название" name="placeNameInput" class="form__input form__input_text_place">
-          <input type="text" required placeholder="Ссылка на картинку" name="linkInput" class="form__input form__input_text_link">
+          <input type="url" required placeholder="Ссылка на картинку" name="linkInput" class="form__input form__input_text_link">
           <button type="submit" class="form__submit-button">Создать</button>
         </form>
       </div>
@@ -72,6 +73,5 @@
       </div>
     </article>
   </template>
-  <script src="./scripts/index.js" defer></script>
 </body>
 </html>

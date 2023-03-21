@@ -45,19 +45,22 @@ const popupProfileEditCloseButtonElement = popupProfileEditElement.querySelector
 const popupPlaceAddCloseButtonElement = popupPlaceAddElement.querySelector('.popup__close-button');
 const popupImageZoomCloseButtonElement = popupImageZoomElement.querySelector('.popup__close-button');
 
+// переменные для попапа увеличения картинки
+const captionPopupImageZoom = popupImageZoomElement.querySelector('.popup__caption');
+const photoPopupImageZoom = popupImageZoomElement.querySelector('.popup__image');
+
 // переменные для формы редактирования профиля
-let nameProfile = document.querySelector('.profile__name');
-let jobProfile = document.querySelector('.profile__job');
+const nameProfile = document.querySelector('.profile__name');
+const jobProfile = document.querySelector('.profile__job');
 
 const formProfileEditElement = document.querySelector('.form_for_profile-edit');
-let nameProfileInput = formProfileEditElement.querySelector('.form__input_text_name');
-let jobProfileInput = formProfileEditElement.querySelector('.form__input_text_job');
+const nameProfileInput = formProfileEditElement.querySelector('.form__input_text_name');
+const jobProfileInput = formProfileEditElement.querySelector('.form__input_text_job');
 
 // переменные для формы добавления карточек
 const formPlaceAddElement = document.querySelector('.form_for_place-add');
-let namePlaceInput = formPlaceAddElement.querySelector('.form__input_text_place');
-let linkPlaceInput = formPlaceAddElement.querySelector('.form__input_text_link');
-
+const namePlaceInput = formPlaceAddElement.querySelector('.form__input_text_place');
+const linkPlaceInput = formPlaceAddElement.querySelector('.form__input_text_link');
 
 // универсальная ф-ция открытия попапа
 const openPopup = function (popup) {
@@ -99,7 +102,7 @@ function handleFormProfileEditSubmit(evt) {
 formProfileEditElement.addEventListener('submit', handleFormProfileEditSubmit);
 
 // объявление шаблона фото-каточек и их места хранения
-const cardTemplate = document.querySelector('.template').content;
+const cardTemplate = document.querySelector('.template');
 const cards = document.querySelector('.places');
 
 //  ф-ция добавления лайка
@@ -114,9 +117,9 @@ const deleteCard = function (evt) {
 
 // ф-ция открытия попапа увеличения картинки
 const zoomPhoto = function (item) {
-  popupImageZoomElement.querySelector('.popup__caption').textContent = item.title;
-  popupImageZoomElement.querySelector('.popup__image').src = item.src;
-  popupImageZoomElement.querySelector('.popup__image').alt = item.alt;
+  captionPopupImageZoom.textContent = item.title;
+  photoPopupImageZoom.src = item.src;
+  photoPopupImageZoom.alt = item.alt;
   openPopup(popupImageZoomElement);
 }
 
@@ -127,19 +130,20 @@ popupImageZoomCloseButtonElement.addEventListener('click', function () {
 
 // ф-ция создания карточки
 const createCard = function (item) {
-  const cardElement = cardTemplate.cloneNode(true);
+  const cardElement = cardTemplate.content.cloneNode(true);
+  const photoCard = cardElement.querySelector('.place__photo');
 
   cardElement.querySelector('.place__title').textContent = item.title;
-  cardElement.querySelector('.place__photo').src = item.src;
-  cardElement.querySelector('.place__photo').alt = item.alt;
+  photoCard.src = item.src;
+  photoCard.alt = item.alt;
 
   cardElement.querySelector('.place__like-button').addEventListener('click', addLike);
   cardElement.querySelector('.place__trash-button').addEventListener('click', deleteCard);
-  cardElement.querySelector('.place__photo').addEventListener('click', function () {
+  photoCard.addEventListener('click', function () {
     zoomPhoto(item);
   });
 
-  return (cardElement)
+  return cardElement;
 }
 
 // добавление исходных карточек
@@ -148,7 +152,7 @@ initialCards.forEach(function (initialCards) {
 });
 
 // ф-ция добавления новой карточки
-const renderCard = function () {
+const renderNewCard = function () {
   const item = {
     title: namePlaceInput.value,
     alt: namePlaceInput.value,
@@ -161,12 +165,11 @@ const renderCard = function () {
 // ф-ция сохранения новой картинки
 function handlePlaceAddFormSubmit(evt) {
   evt.preventDefault();
-  renderCard()
+  renderNewCard()
 
   closePopup(popupPlaceAddElement);
 
-  namePlaceInput.value = '';
-  linkPlaceInput.value = '';
+  formPlaceAddElement.reset();
 }
 
 // вызов ф-ции сохранения новых картинок при нажатии
