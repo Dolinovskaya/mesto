@@ -37,34 +37,19 @@
 @import url(../blocks/popup/__caption/popup__caption.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__input/_type/form__input_type_error.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/_active/form__input-error_active.css);
 @import url(../blocks/form/__submit-button/form__submit-button.css);
+@import url(../blocks/form/__submit-button/_disabled/form__submit-button_disabled.css);
 
-.form__submit-button_disabled {
-  opacity: 0.2;
-  cursor: not-allowed;
-  pointer-events: none;
-}
 
-.form__input_type_error {
-  border-bottom: 1px solid #FF0000;
-}
 
-.form__input_type_error:last-of-type {
-  margin-top: 13px;
-}
 
-.form__input-error {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  color: #FF0000;
-  visibility: hidden;
-  margin-top: 5px;
-}
 
-.form__input-error_active {
-  visibility: visible;
-}
+
+
+
 
 
 

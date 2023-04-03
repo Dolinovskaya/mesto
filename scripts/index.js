@@ -62,33 +62,59 @@ const formPlaceAddElement = document.querySelector('.form_for_place-add');
 const namePlaceInput = formPlaceAddElement.querySelector('.form__input_text_place');
 const linkPlaceInput = formPlaceAddElement.querySelector('.form__input_text_link');
 
-// универсальная ф-ция открытия попапа
+// ф-ция открытия попапа
 const openPopup = function (popup) {
   popup.classList.add('popup_opened');
-}
+  document.addEventListener('keydown', closePopupByClickEscape);
+};
 
-// универсальная ф-ция закрытия попапа
+// ф-ция закрытия попапа
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
-}
+  document.removeEventListener('keydown', closePopupByClickEscape);
+};
+
+// ф-ция закрытия попапа ESC
+const closePopupByClickEscape = function (evt) {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+};
+
+// ф-ция закрытия попапа на оверлей
+const closePopupByClickOverlay = function (evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.currentTarget);
+  };
+};
 
 // вызов открытия/закрытия попапа редактирования профиля при нажатии кнопок
 popupProfileEditOpenButtonElement.addEventListener('click', function () {
-  openPopup(popupProfileEditElement)
+  formProfileEditElement.reset();
+  resetInputError(validationConfig, formProfileEditElement);
+  openPopup(popupProfileEditElement);
   nameProfileInput.value = nameProfile.textContent;
   jobProfileInput.value = jobProfile.textContent;
 });
 popupProfileEditCloseButtonElement.addEventListener('click', function () {
-  closePopup(popupProfileEditElement)
+  closePopup(popupProfileEditElement);
 });
 
 // вызов открытия/закрытия попапа добавления карточки при нажатии кнопок
 popupPlaceAddOpenButtonElement.addEventListener('click', function () {
-  openPopup(popupPlaceAddElement)
+  formPlaceAddElement.reset();
+  resetInputError(validationConfig, formPlaceAddElement);
+  openPopup(popupPlaceAddElement);
 });
 popupPlaceAddCloseButtonElement.addEventListener('click', function () {
-  closePopup(popupPlaceAddElement)
+  closePopup(popupPlaceAddElement);
 });
+
+// вызов закрытия всех попапов при нажатии на оверлей
+popupProfileEditElement.addEventListener('click', closePopupByClickOverlay);
+popupPlaceAddElement.addEventListener('click', closePopupByClickOverlay);
+popupImageZoomElement.addEventListener('click', closePopupByClickOverlay);
 
 // ф-ция сохранения редактирования профиля
 function handleFormProfileEditSubmit(evt) {
@@ -123,7 +149,7 @@ const zoomPhoto = function (item) {
   openPopup(popupImageZoomElement);
 }
 
-// вызов закрытия попапа увеличнения картинки
+// вызов закрытия попапа увеличнения картинки при нажатии кнопок
 popupImageZoomCloseButtonElement.addEventListener('click', function () {
   closePopup(popupImageZoomElement)
 });
