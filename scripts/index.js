@@ -16,8 +16,6 @@ const popupPlaceAddOpenButtonElement = document.querySelector('.profile__add-but
 const captionPopupImageZoom = popupImageZoomElement.querySelector('.popup__caption');
 const photoPopupImageZoom = popupImageZoomElement.querySelector('.popup__image');
 
-export { captionPopupImageZoom, photoPopupImageZoom, popupImageZoomElement, openPopup };
-
 // переменные для формы редактирования профиля
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__job');
@@ -51,6 +49,14 @@ const openPopup = function (popup) {
   document.addEventListener('keydown', closePopupByClickEscape);
 };
 
+// ф-ция открытия попапа увеличения картинки
+const zoomPhoto = function (item) {
+  captionPopupImageZoom.textContent = item.title;
+  photoPopupImageZoom.src = item.src;
+  photoPopupImageZoom.alt = item.alt;
+  openPopup(popupImageZoomElement);
+}
+
 // ф-ция закрытия попапа
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
@@ -78,7 +84,31 @@ popups.forEach((popup) => {
       closePopup(popup)
     }
   })
-})
+});
+
+// ф-ция добавления новой карточки
+const createNewCard = function () {
+  const newItem = {
+    title: namePlaceInput.value,
+    alt: namePlaceInput.value,
+    src: linkPlaceInput.value
+  };
+
+  const newСard = new Card(newItem, templateSelector, zoomPhoto); // создаю экземпляр карточки
+  const newCardElement = newСard.createCard(); // создаю карточку и возвращаю наружу
+
+  cards.prepend(newCardElement); // добавляю в DOM
+}
+
+// ф-ция сохранения новой картинки
+function handlePlaceAddFormSubmit(evt) {
+  evt.preventDefault();
+  createNewCard()
+
+  closePopup(popupPlaceAddElement);
+
+  formPlaceAddElement.reset();
+}
 
 // ф-ция сохранения редактирования профиля
 function handleFormProfileEditSubmit(evt) {
@@ -90,6 +120,28 @@ function handleFormProfileEditSubmit(evt) {
   closePopup(popupProfileEditElement);
 }
 
+// добавление исходных карточек
+initialCards.forEach((item) => {
+  const card = new Card(item, templateSelector, zoomPhoto); // создаю экземпляр карточки
+  const cardElement = card.createCard(); // создаю карточку и возвращаю наружу
+
+  cards.append(cardElement); // добавляю в DOM
+});
+
+// вызов открытия попапа добавления карточки при нажатии кнопок
+popupPlaceAddOpenButtonElement.addEventListener('click', function () {
+  formPlaceAddElement.reset();
+  formPlaceAdd.resetInputError();
+
+  openPopup(popupPlaceAddElement);
+});
+
+// вызов ф-ции сохранения новых картинок при нажатии
+formPlaceAddElement.addEventListener('submit', handlePlaceAddFormSubmit);
+
+// создаю экземпляр формы добавления карточек и применяю валидацию
+const formPlaceAdd = new FormValidator(validationConfig, formPlaceAddElement);
+formPlaceAdd.enableValidation();
 
 // вызов открытия попапа редактирования профиля при нажатии кнопок
 popupProfileEditOpenButtonElement.addEventListener('click', function () {
@@ -108,58 +160,3 @@ formProfileEditElement.addEventListener('submit', handleFormProfileEditSubmit);
 // создаю экземпляр формы профиля и применяю валидацию
 const formProfileEdit = new FormValidator(validationConfig, formProfileEditElement);
 formProfileEdit.enableValidation();
-
-// вызов открытия попапа добавления карточки при нажатии кнопок
-popupPlaceAddOpenButtonElement.addEventListener('click', function () {
-  formPlaceAddElement.reset();
-  formPlaceAdd.resetInputError();
-
-  openPopup(popupPlaceAddElement);
-});
-
-// создаю экземпляр формы добавления карточек и применяю валидацию
-const formPlaceAdd = new FormValidator(validationConfig, formPlaceAddElement);
-formPlaceAdd.enableValidation();
-
-// добавление исходных карточек
-initialCards.forEach((item) => {
-  const card = new Card(item, templateSelector); // создаю экземпляр карточки
-  const cardElement = card.createCard(); // создаю карточку и возвращаю наружу
-
-  cards.append(cardElement); // добавляю в DOM
-});
-
-// ф-ция добавления новой карточки
-const createNewCard = function () {
-  const newItem = {
-    title: namePlaceInput.value,
-    alt: namePlaceInput.value,
-    src: linkPlaceInput.value
-  };
-
-  const newСard = new Card(newItem, templateSelector); // создаю экземпляр карточки
-  const newCardElement = newСard.createCard(); // создаю карточку и возвращаю наружу
-
-  cards.prepend(newCardElement); // добавляю в DOM
-}
-
-// ф-ция сохранения новой картинки
-function handlePlaceAddFormSubmit(evt) {
-  evt.preventDefault();
-  createNewCard()
-
-  closePopup(popupPlaceAddElement);
-
-  formPlaceAddElement.reset();
-}
-
-// вызов ф-ции сохранения новых картинок при нажатии
-formPlaceAddElement.addEventListener('submit', handlePlaceAddFormSubmit);
-
-// ф-ция открытия попапа увеличения картинки
-// const zoomPhoto = function (item) {
-//   captionPopupImageZoom.textContent = item.title;
-//   photoPopupImageZoom.src = item.src;
-//   photoPopupImageZoom.alt = item.alt;
-//   openPopup(popupImageZoomElement);
-// }

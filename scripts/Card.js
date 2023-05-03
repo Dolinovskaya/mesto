@@ -1,12 +1,11 @@
-import { captionPopupImageZoom, photoPopupImageZoom, popupImageZoomElement, openPopup } from './index.js';
-
 export default class Card {
-  constructor(data, templateSelector) {
-    // this._data = data;
+  constructor(data, templateSelector, zoomPhoto) {
+    this._data = data;
     this._title = data.title;
     this._link = data.src;
     this._alt = data._alt;
     this._templateSelector = templateSelector;
+    this._zoomPhoto = zoomPhoto;
   }
 
   _getTemplate() {
@@ -50,10 +49,6 @@ export default class Card {
 
   // метод открытия попапа увеличения картинки
   _handlePhotoClick = () => {
-    captionPopupImageZoom.textContent = this._title;
-    photoPopupImageZoom.src = this._link;
-    photoPopupImageZoom.alt = this._alt;
-
-    openPopup(popupImageZoomElement);
+    this._zoomPhoto(this._data);
   }
 }
