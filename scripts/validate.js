@@ -26,7 +26,7 @@ const hideInputError = (object, formElement, inputElement) => {
 };
 
 // ф-ция, которая меняет состояние поля ввода взависимости от валидности
-const checkInputValidity = (object, formElement, inputElement, formButton) => {
+const checkInputValidity = (object, formElement, inputElement) => {
   if (!inputElement.validity.valid) {
     showInputError(object, formElement, inputElement, inputElement.validationMessage);
   } else {

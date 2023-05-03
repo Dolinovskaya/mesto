@@ -1,6 +1,6 @@
 import initialCards from "./initialCards.js";
 import Card from "./card.js";
-
+import FormValidator from "./FormValidator.js";
 
 // объявление всех попапов
 const popups = document.querySelectorAll('.popup');
@@ -30,6 +30,20 @@ const jobProfileInput = formProfileEditElement.querySelector('.form__input_text_
 const formPlaceAddElement = document.querySelector('.form_for_place-add');
 const namePlaceInput = formPlaceAddElement.querySelector('.form__input_text_place');
 const linkPlaceInput = formPlaceAddElement.querySelector('.form__input_text_link');
+
+// шаблон фото-каточек и их место хранения
+const templateSelector = '.template';
+const cards = document.querySelector('.places');
+
+// данные для валидации форм
+const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonClass: 'form__submit-button_disabled',
+  inputErrorClass: 'form__input_type_error', // для поля ввода (для input)
+  errorClass: 'form__input-error_active' // для span
+}
 
 // ф-ция открытия попапа
 const openPopup = function (popup) {
@@ -66,54 +80,53 @@ popups.forEach((popup) => {
   })
 })
 
+// ф-ция сохранения редактирования профиля
+function handleFormProfileEditSubmit(evt) {
+  evt.preventDefault();
+
+  nameProfile.textContent = nameProfileInput.value;
+  jobProfile.textContent = jobProfileInput.value;
+
+  closePopup(popupProfileEditElement);
+}
+
+
 // вызов открытия попапа редактирования профиля при нажатии кнопок
 popupProfileEditOpenButtonElement.addEventListener('click', function () {
   formProfileEditElement.reset();
-  resetInputError(validationConfig, formProfileEditElement);
+  formProfileEdit.resetInputError();
+
   openPopup(popupProfileEditElement);
+
   nameProfileInput.value = nameProfile.textContent;
   jobProfileInput.value = jobProfile.textContent;
 });
 
-// вызов открытия попапа добавления карточки при нажатии кнопок
-popupPlaceAddOpenButtonElement.addEventListener('click', function () {
-  formPlaceAddElement.reset();
-  resetInputError(validationConfig, formPlaceAddElement);
-  openPopup(popupPlaceAddElement);
-});
-
-// ф-ция сохранения редактирования профиля
-function handleFormProfileEditSubmit(evt) {
-  evt.preventDefault();
-  nameProfile.textContent = nameProfileInput.value;
-  jobProfile.textContent = jobProfileInput.value;
-  closePopup(popupProfileEditElement);
-}
-
 // вызов ф-ции сохранения профиля при нажатии на кнопку
 formProfileEditElement.addEventListener('submit', handleFormProfileEditSubmit);
 
-// объявление шаблона фото-каточек и их места хранения
-const templateSelector = '.template';
-const cards = document.querySelector('.places');
+// создаю экземпляр формы профиля и применяю валидацию
+const formProfileEdit = new FormValidator(validationConfig, formProfileEditElement);
+formProfileEdit.enableValidation();
 
-// ф-ция открытия попапа увеличения картинки
-// const zoomPhoto = function (item) {
-//   captionPopupImageZoom.textContent = item.title;
-//   photoPopupImageZoom.src = item.src;
-//   photoPopupImageZoom.alt = item.alt;
-//   openPopup(popupImageZoomElement);
-// }
+// вызов открытия попапа добавления карточки при нажатии кнопок
+popupPlaceAddOpenButtonElement.addEventListener('click', function () {
+  formPlaceAddElement.reset();
+  formPlaceAdd.resetInputError();
+
+  openPopup(popupPlaceAddElement);
+});
+
+// создаю экземпляр формы добавления карточек и применяю валидацию
+const formPlaceAdd = new FormValidator(validationConfig, formPlaceAddElement);
+formPlaceAdd.enableValidation();
 
 // добавление исходных карточек
 initialCards.forEach((item) => {
-  // создаю экземпляр карточки
-  const card = new Card(item, templateSelector);
-  // создаю карточку и возвращаю наружу
-  const cardElement = card.createCard();
+  const card = new Card(item, templateSelector); // создаю экземпляр карточки
+  const cardElement = card.createCard(); // создаю карточку и возвращаю наружу
 
-  // добавляю в DOM
-  cards.append(cardElement);
+  cards.append(cardElement); // добавляю в DOM
 });
 
 // ф-ция добавления новой карточки
@@ -124,13 +137,10 @@ const createNewCard = function () {
     src: linkPlaceInput.value
   };
 
-  // создаю экземпляр карточки
-  const newСard = new Card(newItem, templateSelector);
-  // создаю карточку и возвращаю наружу
-  const newCardElement = newСard.createCard();
+  const newСard = new Card(newItem, templateSelector); // создаю экземпляр карточки
+  const newCardElement = newСard.createCard(); // создаю карточку и возвращаю наружу
 
-  // добавляю в DOM
-  cards.prepend(newCardElement);
+  cards.prepend(newCardElement); // добавляю в DOM
 }
 
 // ф-ция сохранения новой картинки
@@ -146,4 +156,10 @@ function handlePlaceAddFormSubmit(evt) {
 // вызов ф-ции сохранения новых картинок при нажатии
 formPlaceAddElement.addEventListener('submit', handlePlaceAddFormSubmit);
 
-
+// ф-ция открытия попапа увеличения картинки
+// const zoomPhoto = function (item) {
+//   captionPopupImageZoom.textContent = item.title;
+//   photoPopupImageZoom.src = item.src;
+//   photoPopupImageZoom.alt = item.alt;
+//   openPopup(popupImageZoomElement);
+// }
