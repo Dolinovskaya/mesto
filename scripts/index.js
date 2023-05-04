@@ -20,12 +20,12 @@ const photoPopupImageZoom = popupImageZoomElement.querySelector('.popup__image')
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__job');
 
-const formProfileEditElement = document.querySelector('.form_for_profile-edit');
+const formProfileEditElement = document.forms['formProfileInfo'];
 const nameProfileInput = formProfileEditElement.querySelector('.form__input_text_name');
 const jobProfileInput = formProfileEditElement.querySelector('.form__input_text_job');
 
 // переменные для формы добавления карточек
-const formPlaceAddElement = document.querySelector('.form_for_place-add');
+const formPlaceAddElement = document.forms['formPlaceInfo'];
 const namePlaceInput = formPlaceAddElement.querySelector('.form__input_text_place');
 const linkPlaceInput = formPlaceAddElement.querySelector('.form__input_text_link');
 
@@ -86,6 +86,14 @@ popups.forEach((popup) => {
   })
 });
 
+
+// ф-ция создания карточки
+const createCard = function (item) {
+  const card = new Card(item, templateSelector, zoomPhoto); // создаю экземпляр карточки
+  const cardElement = card.createCard(); // создаю карточку и возвращаю наружу
+  return cardElement;
+}
+
 // ф-ция добавления новой карточки
 const createNewCard = function () {
   const newItem = {
@@ -94,9 +102,7 @@ const createNewCard = function () {
     src: linkPlaceInput.value
   };
 
-  const newСard = new Card(newItem, templateSelector, zoomPhoto); // создаю экземпляр карточки
-  const newCardElement = newСard.createCard(); // создаю карточку и возвращаю наружу
-
+  const newCardElement = createCard(newItem);
   cards.prepend(newCardElement); // добавляю в DOM
 }
 
@@ -120,18 +126,35 @@ function handleFormProfileEditSubmit(evt) {
   closePopup(popupProfileEditElement);
 }
 
+const formValidators = {}
+
+// Включение валидации
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement)
+// получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute('name')
+
+   // вот тут в объект записываем под именем формы
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationConfig);
+
 // добавление исходных карточек
 initialCards.forEach((item) => {
-  const card = new Card(item, templateSelector, zoomPhoto); // создаю экземпляр карточки
-  const cardElement = card.createCard(); // создаю карточку и возвращаю наружу
-
+  const cardElement = createCard(item);
   cards.append(cardElement); // добавляю в DOM
 });
 
 // вызов открытия попапа добавления карточки при нажатии кнопок
 popupPlaceAddOpenButtonElement.addEventListener('click', function () {
   formPlaceAddElement.reset();
-  formPlaceAdd.resetInputError();
+  formValidators['formPlaceInfo'].resetValidation();
+  // formPlaceAdd.resetValidation();
 
   openPopup(popupPlaceAddElement);
 });
@@ -139,14 +162,11 @@ popupPlaceAddOpenButtonElement.addEventListener('click', function () {
 // вызов ф-ции сохранения новых картинок при нажатии
 formPlaceAddElement.addEventListener('submit', handlePlaceAddFormSubmit);
 
-// создаю экземпляр формы добавления карточек и применяю валидацию
-const formPlaceAdd = new FormValidator(validationConfig, formPlaceAddElement);
-formPlaceAdd.enableValidation();
-
 // вызов открытия попапа редактирования профиля при нажатии кнопок
 popupProfileEditOpenButtonElement.addEventListener('click', function () {
   formProfileEditElement.reset();
-  formProfileEdit.resetInputError();
+  formValidators['formProfileInfo'].resetValidation();
+  // formProfileEdit.resetValidation();
 
   openPopup(popupProfileEditElement);
 
@@ -157,6 +177,4 @@ popupProfileEditOpenButtonElement.addEventListener('click', function () {
 // вызов ф-ции сохранения профиля при нажатии на кнопку
 formProfileEditElement.addEventListener('submit', handleFormProfileEditSubmit);
 
-// создаю экземпляр формы профиля и применяю валидацию
-const formProfileEdit = new FormValidator(validationConfig, formProfileEditElement);
-formProfileEdit.enableValidation();
+

@@ -9,6 +9,7 @@ export default class FormValidator {
     this._form = form;
 
     this._formInputs = form.querySelectorAll(this._inputSelector);
+    this._formButton = form.querySelector(this._submitButtonSelector);
   }
 
   // метод, который добавляет полю ввода класс с ошибкой,
@@ -47,7 +48,6 @@ export default class FormValidator {
 
   // метод, который меняет состояние кнопки взависимости от валиндности полей ввода
   _toggleButtonState() {
-    this._formButton = this._form.querySelector(this._submitButtonSelector);
     if (this._hasInvalidInput()) {
       this._formButton.classList.add(this._inactiveButtonClass);
       this._formButton.disabled = true;
@@ -75,7 +75,7 @@ export default class FormValidator {
   }
 
   // метод, который удаляет невалидные состояния полей ввода и кнопки
-  resetInputError() {
+  resetValidation() {
     this._formInputs.forEach((input) => {
       if (!input.validity.valid) {
         this._hideInputError(input);
