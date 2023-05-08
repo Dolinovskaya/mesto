@@ -1,6 +1,9 @@
 import initialCards from "./initialCards.js";
 import Card from "./card.js";
 import FormValidator from "./FormValidator.js";
+import Popup from "./Popup.js";
+import PopupWithImage from "./PopupWithImage.js";
+import Section from "./Section.js";
 
 // объявление всех попапов
 const popups = document.querySelectorAll('.popup');
@@ -31,6 +34,7 @@ const linkPlaceInput = formPlaceAddElement.querySelector('.form__input_text_link
 
 // шаблон фото-каточек и их место хранения
 const templateSelector = '.template';
+const cardsContainerSelector = '.places';
 const cards = document.querySelector('.places');
 
 // данные для валидации форм
@@ -43,56 +47,73 @@ const validationConfig = {
   errorClass: 'form__input-error_active' // для span
 }
 
+const popupProfile = new Popup('.popup_for_profile-edit');
+popupProfile.setEventListeners();
+
+const popupImage = new PopupWithImage('.popup_for_image-zoom');
+popupImage.setEventListeners();
+
 // ф-ция открытия попапа
-const openPopup = function (popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByClickEscape);
-};
+// const openPopup = function (popup) {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', closePopupByClickEscape);
+// };
 
 // ф-ция открытия попапа увеличения картинки
-const zoomPhoto = function (item) {
-  captionPopupImageZoom.textContent = item.title;
-  photoPopupImageZoom.src = item.src;
-  photoPopupImageZoom.alt = item.alt;
-  openPopup(popupImageZoomElement);
-}
+// const zoomPhoto = function (item) {
+//   captionPopupImageZoom.textContent = item.title;
+//   photoPopupImageZoom.src = item.src;
+//   photoPopupImageZoom.alt = item.alt;
+//   openPopup(popupImageZoomElement);
+// }
 
 // ф-ция закрытия попапа
-const closePopup = function (popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupByClickEscape);
-};
+// const closePopup = function (popup) {
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closePopupByClickEscape);
+// };
 
 // ф-ция закрытия попапа ESC
-const closePopupByClickEscape = function (evt) {
-  if (evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
-  }
-};
+// const closePopupByClickEscape = function (evt) {
+//   if (evt.key === 'Escape') {
+//     const popupOpened = document.querySelector('.popup_opened');
+//     closePopup(popupOpened);
+//   }
+// };
 
 // универсальное закрытие попапов
-popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    // закрытие на оверлей
-    if (evt.target.classList.contains('popup_opened')) {
-      closePopup(popup)
-    }
+// popups.forEach((popup) => {
+//   popup.addEventListener('mousedown', (evt) => {
+//     // закрытие на оверлей
+//     if (evt.target.classList.contains('popup_opened')) {
+//       closePopup(popup)
+//     }
 
-    // закрытие на крестик
-    if (evt.target.classList.contains('popup__close-button')) {
-      closePopup(popup)
-    }
-  })
-});
+//     // закрытие на крестик
+//     if (evt.target.classList.contains('popup__close-button')) {
+//       closePopup(popup)
+//     }
+//   })
+// });
 
+
+const cardsList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, templateSelector, popupImage.open); // создаю экземпляр карточки
+    const cardElement = card.createCard(); // создаю карточку и возвращаю наружу
+    return cardElement;
+  }
+}, cardsContainerSelector)
+
+cardsList.renderItems();
 
 // ф-ция создания карточки
-const createCard = function (item) {
-  const card = new Card(item, templateSelector, zoomPhoto); // создаю экземпляр карточки
-  const cardElement = card.createCard(); // создаю карточку и возвращаю наружу
-  return cardElement;
-}
+// const createCard = function (item) {
+//   const card = new Card(item, templateSelector, popupImage.open); // создаю экземпляр карточки
+//   const cardElement = card.createCard(); // создаю карточку и возвращаю наружу
+//   return cardElement;
+// }
 
 // ф-ция добавления новой карточки
 const createNewCard = function () {
@@ -111,7 +132,7 @@ function handlePlaceAddFormSubmit(evt) {
   evt.preventDefault();
   createNewCard()
 
-  closePopup(popupPlaceAddElement);
+  // closePopup(popupPlaceAddElement);
 
   formPlaceAddElement.reset();
 }
@@ -123,7 +144,7 @@ function handleFormProfileEditSubmit(evt) {
   nameProfile.textContent = nameProfileInput.value;
   jobProfile.textContent = jobProfileInput.value;
 
-  closePopup(popupProfileEditElement);
+  // closePopup(popupProfileEditElement);
 }
 
 const formValidators = {}
@@ -145,10 +166,10 @@ const enableValidation = (config) => {
 enableValidation(validationConfig);
 
 // добавление исходных карточек
-initialCards.forEach((item) => {
-  const cardElement = createCard(item);
-  cards.append(cardElement); // добавляю в DOM
-});
+// initialCards.forEach((item) => {
+//   const cardElement = createCard(item);
+//   cards.append(cardElement); // добавляю в DOM
+// });
 
 // вызов открытия попапа добавления карточки при нажатии кнопок
 popupPlaceAddOpenButtonElement.addEventListener('click', function () {
@@ -156,7 +177,7 @@ popupPlaceAddOpenButtonElement.addEventListener('click', function () {
   formValidators['formPlaceInfo'].resetValidation();
   // formPlaceAdd.resetValidation();
 
-  openPopup(popupPlaceAddElement);
+  // openPopup(popupPlaceAddElement);
 });
 
 // вызов ф-ции сохранения новых картинок при нажатии
@@ -168,7 +189,8 @@ popupProfileEditOpenButtonElement.addEventListener('click', function () {
   formValidators['formProfileInfo'].resetValidation();
   // formProfileEdit.resetValidation();
 
-  openPopup(popupProfileEditElement);
+  popupProfile.open();
+  // openPopup(popupProfileEditElement);
 
   nameProfileInput.value = nameProfile.textContent;
   jobProfileInput.value = jobProfile.textContent;
