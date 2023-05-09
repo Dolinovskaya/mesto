@@ -2,7 +2,7 @@ export default class Card {
   constructor(data, templateSelector, zoomPhoto) {
     this._data = data;
     this._title = data.title;
-    this._link = data.src;
+    this._link = data.link;
     this._alt = data._alt;
     this._templateSelector = templateSelector;
     this._zoomPhoto = zoomPhoto;

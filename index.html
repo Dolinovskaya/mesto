@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
   <link rel="stylesheet" href="./pages/index.css">
-  <script type="module" src="./scripts/index.js"></script>
+  <script type="module" src="./pages/index.js"></script>
 </head>
 <body class="page">
   <div class="page__container">
@@ -49,9 +49,9 @@
         <button class="popup__close-button"></button>
         <h2 class="popup__heading">Новое место</h2>
         <form class="form form_for_place-add" name="formPlaceInfo" novalidate>
-          <input id="place-name-input" type="text" required minlength="2" maxlength="30" placeholder="Название" name="placeNameInput" class="form__input form__input_text_place">
+          <input id="place-name-input" type="text" required minlength="2" maxlength="30" placeholder="Название" name="title" class="form__input form__input_text_place">
           <span class="place-name-input-error form__input-error"></span>
-          <input id="link-input" type="url" required placeholder="Ссылка на картинку" name="linkInput" class="form__input form__input_text_link">
+          <input id="link-input" type="url" required placeholder="Ссылка на картинку" name="link" class="form__input form__input_text_link">
           <span class="link-input-error form__input-error"></span>
           <button type="submit" class="form__submit-button">Создать</button>
         </form>
