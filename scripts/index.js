@@ -4,6 +4,7 @@ import FormValidator from "./FormValidator.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
 import Section from "./Section.js";
+import UserInfo from "./UserInfo.js";
 
 // объявление всех попапов
 const popups = document.querySelectorAll('.popup');
@@ -37,6 +38,11 @@ const templateSelector = '.template';
 const cardsContainerSelector = '.places';
 const cards = document.querySelector('.places');
 
+const profileConfig = {
+  profileNameSelector: '.profile__name',
+  profileJobSelector: '.profile__job'
+}
+
 // данные для валидации форм
 const validationConfig = {
   formSelector: '.form',
@@ -53,50 +59,6 @@ popupProfile.setEventListeners();
 const popupImage = new PopupWithImage('.popup_for_image-zoom');
 popupImage.setEventListeners();
 
-// ф-ция открытия попапа
-// const openPopup = function (popup) {
-//   popup.classList.add('popup_opened');
-//   document.addEventListener('keydown', closePopupByClickEscape);
-// };
-
-// ф-ция открытия попапа увеличения картинки
-// const zoomPhoto = function (item) {
-//   captionPopupImageZoom.textContent = item.title;
-//   photoPopupImageZoom.src = item.src;
-//   photoPopupImageZoom.alt = item.alt;
-//   openPopup(popupImageZoomElement);
-// }
-
-// ф-ция закрытия попапа
-// const closePopup = function (popup) {
-//   popup.classList.remove('popup_opened');
-//   document.removeEventListener('keydown', closePopupByClickEscape);
-// };
-
-// ф-ция закрытия попапа ESC
-// const closePopupByClickEscape = function (evt) {
-//   if (evt.key === 'Escape') {
-//     const popupOpened = document.querySelector('.popup_opened');
-//     closePopup(popupOpened);
-//   }
-// };
-
-// универсальное закрытие попапов
-// popups.forEach((popup) => {
-//   popup.addEventListener('mousedown', (evt) => {
-//     // закрытие на оверлей
-//     if (evt.target.classList.contains('popup_opened')) {
-//       closePopup(popup)
-//     }
-
-//     // закрытие на крестик
-//     if (evt.target.classList.contains('popup__close-button')) {
-//       closePopup(popup)
-//     }
-//   })
-// });
-
-
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
@@ -108,12 +70,8 @@ const cardsList = new Section({
 
 cardsList.renderItems();
 
-// ф-ция создания карточки
-// const createCard = function (item) {
-//   const card = new Card(item, templateSelector, popupImage.open); // создаю экземпляр карточки
-//   const cardElement = card.createCard(); // создаю карточку и возвращаю наружу
-//   return cardElement;
-// }
+const userInfo = new UserInfo(profileConfig);
+console.log(userInfo);
 
 // ф-ция добавления новой карточки
 const createNewCard = function () {
