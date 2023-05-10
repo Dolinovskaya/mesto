@@ -1,33 +1,40 @@
+import firstImage from '../../images/Bergamo.jpg';
+import secondImage from '../../images/South-Tyrol.jpg';
+import thirdImage from '../../images/Jaipur.jpg';
+import fourthImage from '../../images/Sydney.jpg';
+import fifthImage from '../../images/Algarve.jpg';
+import sixthImage from '../../images/Namib.jpg';
+
 const initialCards = [
   {
     title: 'Бергамо, Италия',
     alt: 'вид на Бергамо',
-    link: './images/Bergamo.jpg'
+    link: firstImage
   },
   {
     title: 'Южный Тироль, Италия',
     alt: 'озеро окруженное горами',
-    link: './images/South-Tyrol.jpg'
+    link: secondImage
   },
   {
     title: 'Джайпур, Индия',
     alt: 'высокое красное здание с множеством окон',
-    link: './images/Jaipur.jpg'
+    link: thirdImage
   },
   {
     title: 'Сидней, Австралия',
     alt: 'Сиднейский дом оперы в ясную погоду',
-    link: './images/Sydney.jpg'
+    link: fourthImage
   },
   {
     title: 'Алгарве, Португалия',
     alt: 'вид на океан с вершины скалы',
-    link: './images/Algarve.jpg'
+    link: fifthImage
   },
   {
     title: 'Пустыня Намиб',
     alt: 'пустыня Намиб на закате',
-    link: './images/Namib.jpg'
+    link: sixthImage
   }
 ]
 
