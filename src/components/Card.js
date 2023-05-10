@@ -3,7 +3,6 @@ export default class Card {
     this._data = data;
     this._title = data.title;
     this._link = data.link;
-    this._alt = data._alt;
     this._templateSelector = templateSelector;
     this._zoomPhoto = zoomPhoto;
   }
@@ -22,7 +21,7 @@ export default class Card {
     this._trashElement = this._element.querySelector('.place__trash-button');
 
     this._photoElement.src = this._link;
-    this._photoElement.alt = this._alt;
+    this._photoElement.alt = this._title;
     this._titleElement.textContent = this._title;
 
     this._setEventListeners();
@@ -45,6 +44,7 @@ export default class Card {
   // метод удаления карточки
   _handleTrashClick = () => {
     this._element.remove();
+    this._element = null;
   }
 
   // метод открытия попапа увеличения картинки

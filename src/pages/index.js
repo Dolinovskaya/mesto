@@ -10,13 +10,13 @@ import {
   popupImageSelector,
   profileConfig,
   validationConfig
-} from "../scripts/utils/constants.js";
-import Card from "../scripts/components/Card.js";
-import Section from "../scripts/components/Section.js";
-import UserInfo from "../scripts/components/UserInfo.js";
-import PopupWithForm from "../scripts/components/PopupWithForm.js";
-import PopupWithImage from "../scripts/components/PopupWithImage.js";
-import FormValidator from "../scripts/components/FormValidator.js";
+} from "../utils/constants.js";
+import Card from "../components/Card";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import FormValidator from "../components/FormValidator.js";
 
 const userInfo = new UserInfo(profileConfig);
 
@@ -24,21 +24,24 @@ const userInfo = new UserInfo(profileConfig);
 const popupImage = new PopupWithImage(popupImageSelector);
 popupImage.setEventListeners();
 
+
 // попап редактирования профиля
 const popupProfile = new PopupWithForm(popupProfileSelector, (data) => {
   userInfo.setUserInfo(data);
+  popupProfile.close();
 });
 popupProfile.setEventListeners();
 
 // попап добавления карточки
 const popupAddPlace = new PopupWithForm(popupPlaceSelector, (data) => {
   section.addItem(data);
+  popupAddPlace.close();
 })
 popupAddPlace.setEventListeners();
 
+
 // добавление карточек
 const section = new Section({
-  items: initialCards,
   renderer: (item) => {
     const card = new Card(item, templateSelector, popupImage.open); // создаю экземпляр карточки
     const cardElement = card.createCard(); // создаю карточку и возвращаю наружу
@@ -46,7 +49,7 @@ const section = new Section({
   }
 }, cardsContainerSelector)
 
-section.renderItems();
+section.renderItems(initialCards);
 
 // Включение валидации
 const formValidators = {}
