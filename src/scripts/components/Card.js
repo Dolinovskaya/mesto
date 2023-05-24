@@ -1,11 +1,12 @@
 export default class Card {
-  constructor(data, templateSelector, zoomPhoto) {
+  constructor(data, templateSelector, zoomPhoto, openDeletePopup) {
     this._data = data;
     this._title = data.title;
     this._link = data.link;
     this._alt = data._alt;
     this._templateSelector = templateSelector;
     this._zoomPhoto = zoomPhoto;
+    this._openDeletePopup = openDeletePopup;
   }
 
   _getTemplate() {
@@ -44,7 +45,14 @@ export default class Card {
 
   // метод удаления карточки
   _handleTrashClick = () => {
+    this._openDeletePopup(this);
+    // this._element.remove();
+    // this._element = null;
+  }
+
+  removeCard() {
     this._element.remove();
+    this._element = null;
   }
 
   // метод открытия попапа увеличения картинки

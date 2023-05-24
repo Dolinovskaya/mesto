@@ -15,6 +15,7 @@ import Section from "../scripts/components/Section.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import PopupDeleteCard from "../scripts/components/PopupDeleteCard.js";
 import FormValidator from "../scripts/components/FormValidator.js";
 
 const userInfo = new UserInfo(profileConfig);
@@ -32,14 +33,27 @@ popupProfile.setEventListeners();
 // попап добавления карточки
 const popupAddPlace = new PopupWithForm(popupPlaceSelector, (data) => {
   section.addItem(data);
-})
+});
 popupAddPlace.setEventListeners();
+
+// попап редактирования аватара
+const popupAvatar = new PopupWithForm('.popup_for_avatar', (data) => {
+  document.querySelector('.profile__avatar').src = data.link;
+});
+popupAvatar.setEventListeners();
+
+// попап удаления карточки
+const popupDeleteCard = new PopupDeleteCard('.popup_for_delete', (element) => {
+  element.removeCard()
+});
+popupDeleteCard.setEventListeners();
+
 
 // добавление карточек
 const section = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, templateSelector, popupImage.open); // создаю экземпляр карточки
+    const card = new Card(item, templateSelector, popupImage.open, popupDeleteCard.open); // создаю экземпляр карточки
     const cardElement = card.createCard(); // создаю карточку и возвращаю наружу
     return cardElement;
   }
@@ -76,5 +90,12 @@ popupProfileEditOpenButton.addEventListener('click', function () {
   formValidators['formProfileInfo'].resetValidation();
   popupProfile.setInputValue(userInfo.getUserInfo());
   popupProfile.open();
+});
+
+const popupAvatarEditOpenButton = document.querySelector('.profile__avatar-container');
+
+popupAvatarEditOpenButton.addEventListener('click', function () {
+  formValidators['formAvatar'].resetValidation();
+  popupAvatar.open()
 });
 
