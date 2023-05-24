@@ -14,11 +14,11 @@
     <main class="content">
       <section class="profile content__section">
         <div class="profile__info">
-          <img src="<%=require('./images/ava.jpg')%>" alt="фото профиля" class="profile__avatar">
+          <div class="profile__avatar-container"><img src="<%=require('./images/ava.jpg')%>" alt="фото профиля" class="profile__avatar"></div>
           <div class="profile__description">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__job">Исследователь океана</p>
-            <button type="button" class="profile__edit-button" aria-label="кнопка открытия попапа"></button>
+            <button type="button" class="profile__edit-button" aria-label="кнопка открытия попапа редактирования профиля"></button>
           </div>
         </div>
         <button type="button" class="profile__add-button" aria-label="кнопка добавления фотокарточек"></button>
@@ -64,16 +64,37 @@
         </figure>
       </div>
     </div>
+    <div class="popup popup_for_delete">
+    <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <h2 class="popup__heading">Вы уверены?</h2>
+        <button type="submit" class="form__submit-button">Да</button>
+    </div>
   </div>
+   <div class="popup popup_for_avatar">
+      <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <h2 class="popup__heading">Обновить аватар</h2>
+        <form class="form form_for_avatar" name="formAvatar" novalidate>
+          <input id="link-input" type="url" required placeholder="Ссылка на картинку" name="link" class="form__input form__input_text_link">
+          <span class="link-input-error form__input-error"></span>
+          <button type="submit" class="form__submit-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
   <template class="template">
     <article class="place">
       <button type="button" class="place__trash-button" aria-label="кнопка удаления фото-карточки"></button>
       <img src="#" alt="" class="place__photo">
       <div class="place__info">
         <h2 class="place__title"></h2>
-        <button type="button" class="place__like-button" aria-label="кнопка добавления лайка"></button>
+        <div class="place__like">
+          <button type="button" class="place__like-button" aria-label="кнопка добавления лайка"></button>
+          <span class="place__like-counter">0</span>
+        </div>
       </div>
     </article>
   </template>
+  </div>
 </body>
 </html>
