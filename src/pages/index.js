@@ -9,14 +9,25 @@ import {
   popupImageSelector,
   profileConfig,
   validationConfig
-} from "../scripts/utils/constants.js";
-import Card from "../scripts/components/Card.js";
-import Section from "../scripts/components/Section.js";
-import UserInfo from "../scripts/components/UserInfo.js";
-import PopupWithForm from "../scripts/components/PopupWithForm.js";
-import PopupWithImage from "../scripts/components/PopupWithImage.js";
-import PopupDeleteCard from "../scripts/components/PopupDeleteCard.js";
-import FormValidator from "../scripts/components/FormValidator.js";
+} from "../utils/constants.js";
+import Api from "../components/Api.js";
+import Card from "../components/Card.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupDeleteCard from "../components/PopupDeleteCard.js";
+import FormValidator from "../components/FormValidator.js";
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  headers: {
+    authorization: '28464ccd-87b6-479c-8918-28fde9ddc83d',
+    'Content-Type': 'application/json'
+  }
+});
+
+console.log(api);
 
 const userInfo = new UserInfo(profileConfig);
 
