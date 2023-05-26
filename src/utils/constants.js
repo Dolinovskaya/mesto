@@ -1,53 +1,22 @@
-import firstImage from '../images/Bergamo.jpg';
-import secondImage from '../images/South-Tyrol.jpg';
-import thirdImage from '../images/Jaipur.jpg';
-import fourthImage from '../images/Sydney.jpg';
-import fifthImage from '../images/Algarve.jpg';
-import sixthImage from '../images/Namib.jpg';
-
-const initialCards = [
-  {
-    title: 'Бергамо, Италия',
-    link: firstImage
-  },
-  {
-    title: 'Южный Тироль, Италия',
-    link: secondImage
-  },
-  {
-    title: 'Джайпур, Индия',
-    link: thirdImage
-  },
-  {
-    title: 'Сидней, Австралия',
-    link: fourthImage
-  },
-  {
-    title: 'Алгарве, Португалия',
-    link: fifthImage
-  },
-  {
-    title: 'Пустыня Намиб',
-    link: sixthImage
-  }
-]
-
-// кнопки открытия для попапа редактирования профиля и попапа добавления карточек
-const popupProfileEditOpenButton = document.querySelector('.profile__edit-button');
+// кнопки открытия для попапа добавления карточек, попапа редактирования профиля и аватараб
 const popupPlaceAddOpenButton = document.querySelector('.profile__add-button');
+const popupProfileEditOpenButton = document.querySelector('.profile__edit-button');
+const popupAvatarEditOpenButton = document.querySelector('.profile__avatar-container');
 
 // селектор шаблона и контейнера для хранения
 const templateSelector = '.template';
 const cardsContainerSelector = '.places';
 
 // селектора попапов
+const popupAvatarSelector = '.popup_for_avatar';
 const popupProfileSelector = '.popup_for_profile-edit';
 const popupPlaceSelector = '.popup_for_place-add';
 const popupImageSelector = '.popup_for_image-zoom';
 
 const profileConfig = {
   profileNameSelector: '.profile__name',
-  profileJobSelector: '.profile__job'
+  profileJobSelector: '.profile__job',
+  profileAvatarSelector: '.profile__avatar'
 }
 
 // данные для валидации форм
@@ -61,11 +30,12 @@ const validationConfig = {
 }
 
 export {
-  initialCards,
-  popupProfileEditOpenButton,
   popupPlaceAddOpenButton,
+  popupProfileEditOpenButton,
+  popupAvatarEditOpenButton,
   templateSelector,
   cardsContainerSelector,
+  popupAvatarSelector,
   popupProfileSelector,
   popupPlaceSelector,
   popupImageSelector,

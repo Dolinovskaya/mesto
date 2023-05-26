@@ -14,7 +14,7 @@
     <main class="content">
       <section class="profile content__section">
         <div class="profile__info">
-          <div class="profile__avatar-container"><img src="<%=require('./images/ava.jpg')%>" alt="фото профиля" class="profile__avatar"></div>
+          <div class="profile__avatar-container"><img src="#" alt="фото профиля" class="profile__avatar"></div>
           <div class="profile__description">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__job">Исследователь океана</p>
@@ -34,9 +34,9 @@
         <button class="popup__close-button"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
         <form class="form form_for_profile-edit" name="formProfileInfo" novalidate>
-          <input id="user-name-input" type="text" required minlength="2" maxlength="40" placeholder="Имя" name="userNameInput" class="form__input form__input_text_name">
+          <input id="user-name-input" type="text" required minlength="2" maxlength="40" placeholder="Имя" name="userName" class="form__input form__input_text_name">
           <span class="user-name-input-error form__input-error"></span>
-          <input id="job-input" type="text" required minlength="2" maxlength="200" placeholder="О себе" name="jobInput" class="form__input form__input_text_job">
+          <input id="job-input" type="text" required minlength="2" maxlength="200" placeholder="О себе" name="userJob" class="form__input form__input_text_job">
           <span class="job-input-error form__input-error"></span>
           <button type="submit" class="form__submit-button">Сохранить</button>
         </form>
@@ -47,9 +47,9 @@
         <button class="popup__close-button"></button>
         <h2 class="popup__heading">Новое место</h2>
         <form class="form form_for_place-add" name="formPlaceInfo" novalidate>
-          <input id="place-name-input" type="text" required minlength="2" maxlength="30" placeholder="Название" name="title" class="form__input form__input_text_place">
+          <input id="place-name-input" type="text" required minlength="2" maxlength="30" placeholder="Название" name="placeTitle" class="form__input form__input_text_place">
           <span class="place-name-input-error form__input-error"></span>
-          <input id="link-input" type="url" required placeholder="Ссылка на картинку" name="link" class="form__input form__input_text_link">
+          <input id="link-input" type="url" required placeholder="Ссылка на картинку" name="placeLink" class="form__input form__input_text_link">
           <span class="link-input-error form__input-error"></span>
           <button type="submit" class="form__submit-button">Создать</button>
         </form>
@@ -67,7 +67,7 @@
     <div class="popup popup_for_delete">
     <div class="popup__container">
         <button class="popup__close-button"></button>
-        <h2 class="popup__heading">Вы уверены?</h2>
+        <h2 class="popup__heading popup__heading_margin_bottom">Вы уверены?</h2>
         <button type="submit" class="form__submit-button">Да</button>
     </div>
   </div>
@@ -76,7 +76,7 @@
         <button class="popup__close-button"></button>
         <h2 class="popup__heading">Обновить аватар</h2>
         <form class="form form_for_avatar" name="formAvatar" novalidate>
-          <input id="link-input" type="url" required placeholder="Ссылка на картинку" name="link" class="form__input form__input_text_link">
+          <input id="link-input" type="url" required placeholder="Ссылка на картинку" name="avatarLink" class="form__input form__input_text_link">
           <span class="link-input-error form__input-error"></span>
           <button type="submit" class="form__submit-button">Сохранить</button>
         </form>
@@ -90,7 +90,7 @@
         <h2 class="place__title"></h2>
         <div class="place__like">
           <button type="button" class="place__like-button" aria-label="кнопка добавления лайка"></button>
-          <span class="place__like-counter">0</span>
+          <span class="place__like-counter"></span>
         </div>
       </div>
     </article>
