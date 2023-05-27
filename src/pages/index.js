@@ -39,11 +39,12 @@ const popupProfile = new PopupWithForm(popupProfileSelector, (data) => {
         userName: res.name,
         userJob: res.about,
         userAvatar: res.avatar
-      })
+      });
+      popupProfile.close();
     })
     .catch(error => console.error(`Ошибка при редактировании профиля ${error}`))
     .finally(() => popupProfile.returnSubmitButtonDefaultText());
-  popupProfile.close();
+
 });
 popupProfile.setEventListeners();
 
@@ -55,24 +56,24 @@ const popupAvatar = new PopupWithForm(popupAvatarSelector, (data) => {
         userName: res.name,
         userJob: res.about,
         userAvatar: res.avatar
-      })
+      });
+      popupAvatar.close();
     })
     .catch(error => console.error(`Ошибка при редактировании аватара ${error}`))
     .finally(() => popupAvatar.returnSubmitButtonDefaultText());
-  popupAvatar.close();
 });
 popupAvatar.setEventListeners();
 
 // попап добавления карточки
 const popupAddPlace = new PopupWithForm(popupPlaceSelector, (data) => {
-  Promise.all([api.getUserInfo(), api.addNewCard(data)])
-  .then(([dataUser, dataCard]) => {
-    dataCard.my_id = dataUser._id;;
-    section.addItem(dataCard);
-  })
+  api.addNewCard(data)
+    .then(dataCard => {
+      dataCard.my_id = userInfo.getUserId();
+      section.addItem(dataCard);
+      popupAddPlace.close();
+    })
     .catch(error => console.error(`Ошибка при создании новой карточки ${error}`))
     .finally(() => popupAddPlace.returnSubmitButtonDefaultText());
-  popupAddPlace.close();
 });
 popupAddPlace.setEventListeners();
 
@@ -81,10 +82,10 @@ const popupDeleteCard = new PopupDeleteCard('.popup_for_delete', ({ card, cardId
   api.deleteCard(cardId)
     .then(res => {
       card.removeCard();
+      popupDeleteCard.close();
     })
     .catch(error => console.error(`Ошибка при удалении карточки ${error}`))
     .finally(() => popupDeleteCard.returnSubmitButtonDefaultText());
-  popupDeleteCard.close();
 });
 popupDeleteCard.setEventListeners();
 
@@ -162,6 +163,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       userJob: dataUser.about,
       userAvatar: dataUser.avatar
     });
+    userInfo.setUserId(dataUser._id);
     section.renderItems(dataCards);
   })
     .catch(error => console.error(`Ошибка при загрузке исходных данных ${error}`))

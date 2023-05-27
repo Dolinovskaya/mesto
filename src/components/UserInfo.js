@@ -14,4 +14,12 @@ export default class UserInfo {
     this._profileJob.textContent = userJob;
     this._profileAvatar.src = userAvatar;
   }
+
+  setUserId(id) {
+    this._userId = id;
+  }
+
+  getUserId() {
+    return this._userId;
+  }
 }
