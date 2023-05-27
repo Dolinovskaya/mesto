@@ -82,10 +82,10 @@ const popupDeleteCard = new PopupDeleteCard('.popup_for_delete', ({ card, cardId
   api.deleteCard(cardId)
     .then(res => {
       card.removeCard();
-      popupDeleteCard.close();
+      // popupDeleteCard.close();
     })
     .catch(error => console.error(`Ошибка при удалении карточки ${error}`))
-    .finally(() => popupDeleteCard.returnSubmitButtonDefaultText());
+    // .finally(() => popupDeleteCard.returnSubmitButtonDefaultText());
 });
 popupDeleteCard.setEventListeners();
 
